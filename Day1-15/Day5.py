@@ -33,12 +33,29 @@ for i in range(1, 21):
         if i + j + 3 * k == 100:
             print('%d 只公鸡，%d 只母鸡，%d 只小鸡' % (i, j, 3*k))
 
-# 斐波那契数列
-a = 1
-b = 1
-print('1\n1')
-for i in range(2, 1000):
-    if i == a + b:
-        print('%d' % i)
-        a = b
-        b = i
+
+def fib_sheng():  # 斐波那契数列
+    a = 1
+    b = 1
+    print('1\n1')
+    for i in range(2, 1000):
+        if i == a + b:
+            print('%d' % i)
+            a = b
+            b = i
+
+
+def fib(n):  # yield方法生成器的应用
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+        yield a
+
+
+def main():
+    for val in fib(20):
+        print(val)
+
+
+if __name__ == '__main__':
+    main()
