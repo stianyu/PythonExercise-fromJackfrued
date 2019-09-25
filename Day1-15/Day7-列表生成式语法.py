@@ -31,7 +31,7 @@ def list_function():
         print(val)
 
 
-def run_horse_lamp():
+def run_horse_lamp():  # scroll the marquee
     content = '北京欢迎你为你开天辟地…………'
     while True:
         # 清理屏幕上的输出
@@ -42,7 +42,7 @@ def run_horse_lamp():
         content = content[1:] + content[0]
 
 
-def generate_code(code_len=4):
+def generate_code(code_len=4):  # generate a CAPTCHA
     content = '0123456789abcdefghigklmnopqrstuvwxyz'
     last_pos = len(content)-1
     code = ''
@@ -52,7 +52,7 @@ def generate_code(code_len=4):
     return code
 
 
-def how_many_day(year, month, day):
+def how_many_day(year, month, day):  # calculate days passed
     days = [[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
             [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]]
     is_leap_year = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
@@ -61,8 +61,7 @@ def how_many_day(year, month, day):
     return day
 
 
-def pascals_triangle(row):
-    colum = row
+def pascals_triangle(row):  # my code to generate yanghui triangle
     pt = [[]] * row
     for r in range(row):
         pt[r] = [None] * (r+1)
@@ -74,9 +73,47 @@ def pascals_triangle(row):
     return pt
 
 
+def print_pt(n):  # my code
+    for i, row in enumerate(pascals_triangle(n)):
+        print(("   "*(n - i) + "{:6}" * (i + 1)).format(*row))
+
+
+def pascal_triangle(n):  # code 1 for example
+    row = [1]
+    yield row
+    for _ in range(n):
+        row = [1] + [x + y for x, y in zip(row[:-1], row[1:])] + [1]
+        yield row
+
+
+def generate_pascal(n):  # code 2 for example
+    p = []
+    for i in range(n):
+        line = [1]
+        if i:
+            prev_line = p[-1]
+            for j in range(1, i):
+                line.append(prev_line[j - 1] + prev_line[j])
+            line.append(1)
+        p.append(line)
+    return p
+
+
+def print_pascal(p, end=" ", sep=" "):  # code 2 for example
+    n = len(p)
+    for i, line in enumerate(p):
+        print("   " * (n - i), end=end, sep=sep)
+        for e in line:
+            print('{0:5}'.format(e), end=sep, sep=sep)
+        print()
+
+
 def main():
     # print(how_many_day(2019, 2, 1))
-    print(x for x in pascals_triangle(5))
+    n = int(input('input n: '))
+    print_pt(n)
+    p = generate_pascal(n)
+    print_pascal(p)
 
 
 if __name__ == '__main__':
