@@ -47,7 +47,7 @@ def fib_sheng():  # 斐波那契数列
 
 def fib(n):  # yield方法生成器的应用
     a, b = 0, 1
-    for _ in range(n):
+    for _ in range(n):  # '_'生成一个不需要用的变量，这里意为执行循环20次
         a, b = b, a + b
         yield a
 
